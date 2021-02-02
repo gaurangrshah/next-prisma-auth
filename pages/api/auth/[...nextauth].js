@@ -4,13 +4,6 @@ import Adapters from "next-auth/adapters";
 import { prisma } from "@/prisma";
 import { email, github, credentials } from "@/next-auth";
 
-// ❌ const providers = [
-//   Providers.GitHub({
-//     clientId: process.env.GITHUB_ID,
-//     clientSecret: process.env.GITHUB_SECRET,
-//   }),
-// ];
-
 const providers = [Providers.Email(email)];
 
 if (process.env.GITHUB_ID) {
