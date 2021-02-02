@@ -2,13 +2,24 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
 import { prisma } from "@/prisma";
+import { email, github, credentials } from "@/next-auth";
 
-const providers = [
-  Providers.GitHub({
-    clientId: process.env.GITHUB_ID,
-    clientSecret: process.env.GITHUB_SECRET,
-  }),
-];
+// ❌ const providers = [
+//   Providers.GitHub({
+//     clientId: process.env.GITHUB_ID,
+//     clientSecret: process.env.GITHUB_SECRET,
+//   }),
+// ];
+
+const providers = [Providers.Email(email)];
+
+if (process.env.GITHUB_ID) {
+  // save user with github credentials
+  providers.push(Providers.GitHub(github));
+} else {
+  // save user with local credentials
+  providers.push(Providers.Credentials(credentials));
+}
 
 const options = {
   providers,
@@ -43,6 +54,5 @@ const options = {
   // Enable debug messages in the console if you are having problems
   // debug: true,
 };
-
 
 export default (req, res) => NextAuth(req, res, options);
