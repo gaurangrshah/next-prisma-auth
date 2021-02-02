@@ -36,6 +36,7 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.15.0"
+    "@prisma/cli": "^2.15.0",
+    "morgan": "^1.10.0"
   }
 }

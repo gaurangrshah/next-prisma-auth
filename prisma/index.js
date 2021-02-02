@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "production") {
   if (!global.prisma) {
     console.log("generating new prisma client");
     global.prisma = new PrismaClient({
-      log: ["query", "info", "warn"],
+      // log: ["query", "info", "warn"],
     });
     global.prisma.$use(logging);
   }

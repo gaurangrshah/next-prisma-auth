@@ -1,7 +1,8 @@
 import nc from "next-connect";
+import middleware from "@/middleware/index";
 import { getUserById, updateUser, deleteUser } from "@/controllers/user";
 const handler = nc()
-  // .use(someMiddleware())
+  .use(middleware)
   .get(async (req, res) => {
     const user = await getUserById(Number(req.query.id));
 
@@ -16,11 +17,10 @@ const handler = nc()
     return res.status(200).json({ user });
   })
   .delete(async (req, res) => {
-
-    const user = await deleteUser(Number(req.query.id))
+    const user = await deleteUser(Number(req.query.id));
 
     if (!user) return res.status(400).json({ error: "cannot delete user" });
-    return res.status(200).json({ message: 'success' });
+    return res.status(200).json({ message: "success" });
   });
 
 export default handler;

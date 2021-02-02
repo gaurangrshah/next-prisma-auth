@@ -1,8 +1,9 @@
 import nc from "next-connect";
+import middleware from "@/middleware/index";
 import { getUsers, createUser, deleletAllUsers } from "@/controllers/user";
 
 const handler = nc()
-  // .use(someMiddleware())
+  .use(middleware)
   .get(async (req, res) => {
     const users = await getUsers();
 

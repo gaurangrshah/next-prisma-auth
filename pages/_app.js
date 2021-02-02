@@ -13,7 +13,7 @@ import Nprogress from "@/components/nprogress";
 // import data from "@/config/setup.json";
 
 const App = ({ Component, pageProps }) => {
-  console.log(theme);
+  // console.log(theme);
   return (
     <>
       <DefaultSeo {...SEO} />
