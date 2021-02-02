@@ -1,0 +1,17 @@
+{
+  "title": "Next Chakra Starter",
+  "description": "Starter Template for GSDev",
+  "pages": [
+    { "title": "home", "prefix": null, "path": "/" },
+    { "title": "tasks", "prefix": "/api", "path": "/tasks" },
+    { "title": "users", "prefix": "/api", "path": "/users" },
+    { "title": "posts", "prefix": "/", "path": "posts" },
+    { "title": "contact", "prefix": "/", "path": "contact" },
+    { "title": "dashboard", "prefix": "/", "path": "dashboard" }
+  ],
+  "repositoryUrl": "https://github.com/username/repo-name.git",
+  "preview_branch": "staging",
+  "deploy_branch": "main",
+  "preview_url": "https://pathto.vercel.app/admin",
+  "deploy_url": "https://pathto.vercel.app/"
+}
