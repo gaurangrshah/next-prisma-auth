@@ -6,7 +6,7 @@ const handler = nc()
   .use(middleware)
   .get(async (req, res) => {
     const users = await getUsers();
-
+    console.log(prisma)
     if (!users.length) {
       return res.status(404).json({ error: "cannot find any users" });
     }
