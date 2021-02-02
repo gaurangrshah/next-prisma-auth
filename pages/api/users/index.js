@@ -1,12 +1,12 @@
 import nc from "next-connect";
 import middleware from "@/middleware/index";
-// ❌ import { getUsers, createUser, deleletAllUsers } from "@/controllers/user";
+
 import { tryCatch } from "@/helpers";
 
 const handler = nc()
   .use(middleware)
   .get(async (req, res) => {
-    // ❌ const users = await getUsers();
+
     const users = await tryCatch(req.prisma.user.findMany({}));
 
     if (!users.length) {
@@ -16,7 +16,7 @@ const handler = nc()
     return res.json({ users });
   })
   .post(async (req, res) => {
-    // ❌ const user = await createUser(req.body);
+
     const user = await tryCatch(
       req.prisma.user.create({
         data: req.body,
@@ -28,7 +28,7 @@ const handler = nc()
     return res.json({ user });
   })
   .delete(async (req, res) => {
-    // ❌ const response = await deleletAllUsers();
+
     const response = tryCatch(req.prisma.user.deleteMany({}));
 
     if (!response) return res.status(404).json({ error: "cannot create user" });
