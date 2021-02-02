@@ -5,6 +5,7 @@ export async function getUserById(id) {
   return await tryCatch(
     prisma.user.findUnique({
       where: { id },
+      include: { accounts: true },
     })
   );
 }

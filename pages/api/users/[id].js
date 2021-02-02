@@ -1,5 +1,4 @@
 import nc from "next-connect";
-import { prisma } from "@/prisma";
 import { getUserById, updateUser, deleteUser } from "@/controllers/user";
 const handler = nc()
   // .use(someMiddleware())
