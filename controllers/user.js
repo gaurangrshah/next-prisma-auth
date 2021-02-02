@@ -1,6 +1,8 @@
 import { prisma } from "@/prisma";
 import { tryCatch } from "@/helpers";
 
+/* none of these functions are current being used  */
+
 export async function getUserById(id) {
   return await tryCatch(
     prisma.user.findUnique({
