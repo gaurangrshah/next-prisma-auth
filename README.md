@@ -489,6 +489,40 @@ export default Index;
 ```
 
 ```bash
+mkdir hooks && touch hooks/useAuth.js
+```
+
+```js
+// hooks/useAuth.js
+
+import { useState, useEffect } from "react";
+import { signIn, signOut, useSession } from "next-auth/client";
+
+export const useAuth = () => {
+  const [session, loading] = useSession();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    !session ? setIsAuthenticated(false) : setIsAuthenticated(true);
+    return () => setIsAuthenticated(false);
+  }, [session]);
+  return {
+    isAuthenticated,
+    session,
+    loading,
+    signIn,
+    signOut,
+  };
+};
+```
+
+## Next-Connect
+
+```bash
+yarn add next-connect
+```
+
+```bash
 mkdir pages/api/users && touch pages/api/users/index.js
 ```
 
@@ -501,12 +535,6 @@ export default async function handler(req, res) {
   const users = await prisma.user.findMany({});
   res.status(200).json({ name: users[0].name, users });
 }
-```
-
-## Next-Connect
-
-```bash
-yarn add next-connect
 ```
 
 ```js
