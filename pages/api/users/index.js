@@ -6,8 +6,9 @@ import { tryCatch } from "@/helpers";
 const handler = nc()
   .use(middleware)
   .get(async (req, res) => {
-
-    const users = await tryCatch(req.prisma.user.findMany({}));
+    const users = await tryCatch(
+      req.prisma.user.findMany({ include: { account: true } })
+    );
 
     if (!users.length) {
       return res.status(404).json({ error: "cannot find any users" });
@@ -16,7 +17,6 @@ const handler = nc()
     return res.json({ users });
   })
   .post(async (req, res) => {
-
     const user = await tryCatch(
       req.prisma.user.create({
         data: req.body,
@@ -28,7 +28,6 @@ const handler = nc()
     return res.json({ user });
   })
   .delete(async (req, res) => {
-
     const response = tryCatch(req.prisma.user.deleteMany({}));
 
     if (!response) return res.status(404).json({ error: "cannot create user" });

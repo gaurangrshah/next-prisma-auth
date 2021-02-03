@@ -14,6 +14,7 @@ model Account {
   id                 Int       @id @default(autoincrement())
   compoundId         String    @unique @map(name: "compound_id")
   userId             Int       @map(name: "user_id")
+  user               User      @relation(fields: [userId], references: [id])
   providerType       String    @map(name: "provider_type")
   providerId         String    @map(name: "provider_id")
   providerAccountId  String    @map(name: "provider_account_id")
@@ -50,6 +51,7 @@ model User {
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  account       Account?
 
   @@map(name: "users")
 }
