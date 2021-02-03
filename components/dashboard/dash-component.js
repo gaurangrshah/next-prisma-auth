@@ -1,68 +1,42 @@
-import { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { Box, Flex, UnorderedList } from "@chakra-ui/react";
+import { Section } from "./section";
+import { usePositionReorder } from "@/hooks/use-position-reorder";
 
-import { AddIconButton, SectionDetails } from "./section";
-import { Holder } from "./holder";
+const DEFAULT_ITEMS = [60, 80, 70, 100];
 
-const dummySection = {
-  title: "Home Hero",
-  order: 0,
-  block: {
-    type: "content",
-    lead: "This is a lead",
-    title: "This is the Title",
-    excerpt: "This is the excerpt",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sapiente? Corrupti, laborum quae voluptatem impedit architecto incidunt quam dolorum veniam.",
-  },
-  pages: ["home"],
-};
-
-const createNewSection = () => ({
-  title: "untitled",
-  order: 0
-})
-
-export const DashComponent = ({ children }) => {
-  const [sections, setSections] = useState([]);
+export const DashComponent = ({ items = [], children }) => {
+  const [order, setOrder, updatePosition, updateOrder] = usePositionReorder([]);
 
   useEffect(() => {
-    !sections.length && setSections([dummySection]);
-  }, [sections]);
-
-  const createSection = (sectionTitle = "untitled") => {
-    console.log("creating new section");
-    const newSection = createNewSection();
-    setSections((prevSections) => [...prevSections, newSection]);
-  };
+    console.log("running effect", items);
+    items.length ? setOrder(items) : setOrder(DEFAULT_ITEMS);
+  }, []);
 
   return (
-    <Box
-      as='ul'
-      w={["4/5", null, "3/4", "8/12"]}
-      maxW='4xl'
-      h='70vh'
-      m='auto auto'
-      mb={24}
-      px={2}
-      py={2}
-      borderRadius='md'
-      border='0.25px solid lightgray'
-      bg='#fff'
-      display='flex'
-      flexDirection='column'
-      overflowY='auto'
-      className='no-scroll'
-    >
-      {sections.length &&
-        sections.map((section) => (
-          <Holder key={section.title} minH={60} listItem>
-            <SectionDetails contentSection={section} />
-          </Holder>
-        ))}
-      <Holder w={["85%", null, "70%"]} mx='auto'>
-        <AddIconButton onClick={createSection} />
-      </Holder>
-    </Box>
+    <Flex w='full' mx='auto' border='1px solid red'>
+      <Box bg='blue.200' minW='15%'>
+        left
+      </Box>
+      <Box bg='blue.500' flex={1}>
+        Center
+      </Box>
+      <UnorderedList listStyleType='none' minW="30%">
+        {order.map((item, i) => {
+          // item.id = i
+          // item.order = i
+          return (
+            <Section
+              key={item}
+              item={item}
+              i={i}
+              updatePosition={updatePosition}
+              updateOrder={updateOrder}
+              bg='blue.50'
+            />
+          );
+        })}
+      </UnorderedList>
+    </Flex>
   );
 };

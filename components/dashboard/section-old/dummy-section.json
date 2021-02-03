@@ -1,0 +1,11 @@
+{
+  "title": "Home Hero",
+  "block": {
+    "type": "content",
+    "lead": "This is a lead",
+    "title": "This is the Title",
+    "excerpt": "This is the excerpt",
+    "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, sapiente? Corrupti, laborum quae voluptatem impedit architecto incidunt quam dolorum veniam."
+  },
+  "pages": ["home"]
+}

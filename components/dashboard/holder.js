@@ -2,14 +2,14 @@ import {Box} from "@chakra-ui/react"
 
 export const Holder = ({ listItem = false, children, ...rest }) => {
   return (
-    <Box
-      as={listItem && 'li'}
-      w='full'
-      mx='auto'
-      p={6}
-      borderRadius='md'
-      listStyleType='none'
-    >
+    // <Box
+    //   as={listItem && 'li'}
+    //   w='full'
+    //   mx='auto'
+    //   p={6}
+    //   borderRadius='md'
+    //   listStyleType='none'
+    // >
       <Box
         p={3}
         py={4}
@@ -34,6 +34,6 @@ export const Holder = ({ listItem = false, children, ...rest }) => {
       >
         {children}
       </Box>
-    </Box>
+    // </Box>
   );
 };
